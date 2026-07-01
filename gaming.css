@@ -14,7 +14,9 @@ body {
     justify-content: space-between;
     align-items: center;
     background-color: #0171F9;
-    padding: 30px 100px;
+    padding: 30px 5%;          /* كان 100px - خليناه 5% عشان يتأقلم مع أي شاشة */
+    flex-wrap: wrap;           /* عشان لو الشاشة صغرت، العناصر تنزل لسطر جديد */
+    gap: 15px;                 /* مسافة بين العناصر لما يلفوا */
 }
 
 .navbar a {
@@ -24,6 +26,14 @@ body {
     border-radius: 15px;
     margin: 0 5px;
     transition: background-color 0.3s ease;
+}
+
+/* ده جديد - بنتحكم في اللينكات جوه الـ navbar */
+.navbar section {
+    display: flex;
+    flex-wrap: wrap;           /* اللينكات تلف لسطر جديد على الموبايل */
+    align-items: center;
+    gap: 5px;
 }
 
 .navbar a:hover {
@@ -50,8 +60,10 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 30px 100px;
+    padding: 30px 5%;          /* كان 100px */
     border-radius: 0 0 40px 40px;
+    flex-wrap: wrap;           /* النص والصورة ينزلوا تحت بعض على الموبايل */
+    gap: 30px;                 /* مسافة بينهم لما يلفوا */
 }
 
 .landing-page h1 {
@@ -66,7 +78,8 @@ body {
     color: white;
 }
 .left {
-    width: 600px;
+    max-width: 600px;          /* كان width: 600px ثابت - دلوقتي أقصى عرض 600 */
+    width: 100%;               /* لكن يقدر يصغر مع الشاشة */
 }
 .search {
     position: relative;
@@ -105,13 +118,17 @@ body {
 
 .right img {
     border-radius: 20px;
+    max-width: 100%;           /* الصورة متطلعش برا الشاشة */
+    height: auto;              /* تحافظ على النسبة بتاعتها */
 }
 
 .Trending-Games {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 30px 100px;
+    padding: 30px 5%;          /* كان 100px */
+    flex-wrap: wrap;           /* يلف على الموبايل */
+    gap: 15px;
 }
 .trending-words-sec span {
     color: #EE626B;
@@ -134,24 +151,25 @@ body {
 }
 .card {
     width: 250px;
-    height: 250px;
+    /* شلنا height: 250px لأن الارتفاع الثابت بيقطع المحتوى، سيبه auto */
 }
 .card img {
     border-radius: 20px 20px 0 0;
-    max-width: 360px;
-    width: 250px;
+    width: 100%;               /* كان 250px ثابت - دلوقتي بياخد عرض الكارت */
+    height: auto;
     margin: 0;
     padding: 0;
+    display: block;            /* يشيل أي مسافة تحت الصورة */
 }
 .card-body {
     background-color: #eee;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 250px;
-    max-width: 360px;
+    width: 100%;               /* كان 250px - دلوقتي بياخد عرض الكارت */
     margin-top: -6px;
     border-radius: 0 0 20px 20px;
+    box-sizing: border-box;    /* الـ padding يتحسب جوه العرض مش برا */
 }
 .card-body img {
    width: 40px;
@@ -168,10 +186,69 @@ body {
     transform: scale(1.2);
 }
 .container {
-    padding: 30px 100px;
+    padding: 30px 5%;          /* كان 100px */
     display: flex;
     max-width: 100%;
     gap: 16px;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;   /* center أحسن من space-between مع wrap */
+    flex-wrap: wrap;           /* الكروت تنزل لسطور جديدة على الموبايل */
+    box-sizing: border-box;    /* الـ padding يتحسب جوه */
+}
+
+/* ========== MEDIA QUERIES ========== */
+
+/* --- تابلت (768px وأقل) --- */
+@media (max-width: 768px) {
+    .landing-page {
+        flex-direction: column;    /* النص فوق والصورة تحت */
+        text-align: center;
+    }
+
+    .landing-page h1 {
+        font-size: 28px;           /* الخط يصغر شوية */
+    }
+
+    .search {
+        margin: 0 auto;            /* الـ search bar يتوسط */
+    }
+
+    .container {
+        justify-content: center;   /* الكروت في النص */
+    }
+
+    .navbar section {
+        justify-content: center;   /* اللينكات تتوسط */
+    }
+}
+
+/* --- موبايل (480px وأقل) --- */
+@media (max-width: 480px) {
+    .landing-page h1 {
+        font-size: 22px;           /* الخط أصغر كمان */
+    }
+
+    .landing-page h4 {
+        font-size: 14px;
+    }
+
+    .navbar {
+        justify-content: center;   /* كل حاجة في النص */
+        padding: 15px 4%;
+    }
+
+    .navbar a {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+
+    .card {
+        width: 100%;               /* الكارت ياخد عرض الشاشة كلها */
+        max-width: 300px;
+    }
+
+    .Trending-Games {
+        flex-direction: column;    /* العنوان فوق والزر تحت */
+        text-align: center;
+    }
 }
