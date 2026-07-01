@@ -172,7 +172,7 @@ body {
     box-sizing: border-box;    /* الـ padding يتحسب جوه العرض مش برا */
 }
 .card-body img {
-   width: 40px;
+    width: 40px;
     padding: 10px 20px;
     transition: 0.3s ease;
 }
@@ -189,7 +189,7 @@ body {
     padding: 30px 5%;          /* كان 100px */
     display: flex;
     max-width: 100%;
-    gap: 16px;
+    gap: 20px;
     align-items: center;
     justify-content: center;   /* center أحسن من space-between مع wrap */
     flex-wrap: wrap;           /* الكروت تنزل لسطور جديدة على الموبايل */
